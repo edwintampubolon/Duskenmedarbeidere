@@ -1,0 +1,95 @@
+<!--
+  Copyright 2006 - 2010 Under Dusken
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<configuration>
+
+    <appender name="duskeninfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss dd-MM-yyyy} %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+
+        <file>marbinfo.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>marbinfo.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+                <expression>logger.contains("no.dusken") &amp;&amp; level == INFO</expression>
+            </evaluator>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+    </appender>
+
+    <appender name="duskenerror" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss dd-MM-yyyy} %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+
+        <file>marberror.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>marberror.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+                <expression>logger.contains("no.dusken") &amp;&amp; level != INFO</expression>
+            </evaluator>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+    </appender>
+
+    <appender name="other" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss dd-MM-yyyy} %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+
+        <file>${loggingDirectory}/other.log</file>
+        <append>true</append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${loggingDirectory}/other.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+                <expression>logger.contains("no.dusken")</expression>
+            </evaluator>
+            <OnMismatch>ACCEPT</OnMismatch>
+            <OnMatch>DENY</OnMatch>
+        </filter>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss dd-MM-yyyy} %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="duskeninfo" />
+        <appender-ref ref="duskenerror" />
+        <appender-ref ref="other" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+    <logger name="no.dusken" level="info"/>
+</configuration>
