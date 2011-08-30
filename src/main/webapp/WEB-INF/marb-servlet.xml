@@ -32,6 +32,6 @@
     <context:component-scan base-package="no.dusken.medarbeidere"/>
     <mvc:resources location="classpath*:staticresources" mapping="resources/**"/>
     <mvc:annotation-driven />
-    <mvc:view-controller path="/" view-name="index.jsp" />
+    <mvc:view-controller path="/" view-name="index" />
     <mvc:default-servlet-handler/>
 </beans>
