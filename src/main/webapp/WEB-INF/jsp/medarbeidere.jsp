@@ -3,7 +3,7 @@
     <h1>${header}</h1>
     <ul>
         <c:forEach var="person" items="${people}">
-            <li>${person.name}</li>
+            <li><a href="/person/${person.username}">${person.name}</a></li>
         </c:forEach>
     </ul>
 </div>
