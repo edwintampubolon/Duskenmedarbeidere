@@ -32,8 +32,8 @@
         </property>
     </bean>
 
-    <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="file:${dataDir}/ldap.properties" />
+    <bean id="propertyReplacer" class="no.dusken.common.plugin.spring.PropertyReplacer">
+        <property name="filename" value="marb.conf"/>
     </bean>
 
     <bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource">
