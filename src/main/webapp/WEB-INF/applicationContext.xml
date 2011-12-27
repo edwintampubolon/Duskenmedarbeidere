@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-autowire="byName">
+
+    <bean class="no.dusken.common.spring.DatadirPropertyConfigurer">
+        <property name="configurationFileName" value="marb.conf" />
+        <property name="dataDirectoryLocator">
+            <bean class="org.simplericity.datadirlocator.DefaultDataDirectoryLocator">
+                <property name="defaultDir" value="$HOME/marbstorage"/>
+                <property name="envVarName" value="MARBDATADIR"/>
+                <property name="jndiName" value="marbDataDir"/>
+                <property name="systemProperty" value="marbDataDir"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="propertyReplacer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="file:/home/marv/marbstorage/marb.conf"/>
+    </bean>
+</beans>

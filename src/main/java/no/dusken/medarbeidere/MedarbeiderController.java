@@ -20,36 +20,32 @@ public class MedarbeiderController {
     private String listview = "medarbeidere";
     private String medarbeiderview = "medarbeider";
 
+    @Autowired
     private PersonService personService;
 
     @RequestMapping("/aktive")
     public String getAktivePersons(Model model){
         model.addAttribute("header", "Aktive personer");
-        model.addAttribute("person", personService.getActivePersons());
+        model.addAttribute("person", personService.getByActive());
         return listview;
     }
 
     @RequestMapping("/ikkeaktive")
     public String getIkkeAktivePersons(Model model){
         model.addAttribute("header", "Ikke-aktive personer");
-        model.addAttribute("person", personService.getNonActivePersons());
+        model.addAttribute("person", personService.getByNotActive());
         return listview;
     }
 
     @RequestMapping(value = "/medarbeider/{uid}", method = RequestMethod.GET)
     public String getMedarbeider(@PathVariable String uid, Model model){
-        model.addAttribute("person", personService.getPersonByUsername(uid));
+        model.addAttribute("person", personService.getByUsername(uid));
         return medarbeiderview;
     }
 
-    @RequestMapping(value = "/medarbeider/{uid}", method = RequestMethod.POST)
+    @RequestMapping(value = "/medarbeider/{person}", method = RequestMethod.POST)
     public String updateMedarbeider(@Valid Person person, Model model){
 
         return medarbeiderview;
-    }
-
-    @Autowired
-    public void setPersonService(PersonService personService) {
-        this.personService = personService;
     }
 }

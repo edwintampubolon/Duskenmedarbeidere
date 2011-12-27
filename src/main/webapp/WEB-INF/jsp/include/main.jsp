@@ -20,8 +20,6 @@
     </nav>
 </header>
 
-<sitemesh:write property='body'/>
-
 <footer>Under Dusken</footer>
 </body>
 </html>
