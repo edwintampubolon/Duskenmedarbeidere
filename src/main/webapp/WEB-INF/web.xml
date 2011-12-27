@@ -6,7 +6,6 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:META-INF/applicationContext-*.xml
             /WEB-INF/applicationContext*.xml
         </param-value>
     </context-param>
@@ -44,7 +43,7 @@
 
     <servlet-mapping>
         <servlet-name>marb</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 </web-app>
