@@ -21,11 +21,11 @@
             <Pattern>%d{HH:mm:ss dd-MM-yyyy} %-5level %logger{36} - %msg%n</Pattern>
         </layout>
 
-        <file>marbinfo.log</file>
+        <file>${loggingDirectory}/marbinfo.log</file>
         <append>true</append>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>marbinfo.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
+			<FileNamePattern>${loggingDirectory}/marbinfo.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
         <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
@@ -42,11 +42,11 @@
             <Pattern>%d{HH:mm:ss dd-MM-yyyy} %-5level %logger{36} - %msg%n</Pattern>
         </layout>
 
-        <file>marberror.log</file>
+        <file>${loggingDirectory}/marberror.log</file>
         <append>true</append>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>marberror.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
+			<FileNamePattern>${loggingDirectory}/marberror.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
         <filter class="ch.qos.logback.core.filter.EvaluatorFilter">

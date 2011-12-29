@@ -1,14 +1,14 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!doctype html>
 <html lang="no">
 <head>
-    <title><sitemesh:write property='title'/> | Medarbeidere i Under Dusken</title>
+    <title>Medarbeidere i Under Dusken</title>
     <link href="/resources/css/main.css" media="screen" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="/resources/images/udlogo.png" />
-    <sitemesh:write property='head'/>
 </head>
 <body>
 <header>
-    <h1>Administrer medarbeidere</h1>
+    <h1>Medarbeidere i Under Dusken</h1>
     <nav>
         <ul>
             <li><a href="/">Oversikt</a></li>
@@ -19,7 +19,3 @@
         </ul>
     </nav>
 </header>
-
-<footer>Under Dusken</footer>
-</body>
-</html>

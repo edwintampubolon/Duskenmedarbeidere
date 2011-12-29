@@ -1,16 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="no">
-<head>
-    <title>Oversikt</title>
-</head>
-<body>
-
-<div id="menu">
-    <a title="Vis aktive" href="/aktive">Vis aktive</a>
-    <a title="Vis ikke-aktive" href="/ikkeaktive">Vis ikke-aktive</a>
-</div>
-
-
-</body>
-</html>
+<jsp:include page="include/header.jsp" />
+<form action="/medarbeidere/search" method="post">
+    <label for="search">Søk:</label>
+    <input type="search" name="search" id="search">
+    <input type="submit" value="Søk">
+</form>
+<jsp:include page="include/footer.jsp" />

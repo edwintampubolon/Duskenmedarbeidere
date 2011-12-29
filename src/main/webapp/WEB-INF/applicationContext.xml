@@ -1,12 +1,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
        default-autowire="byName">
 
     <import resource="classpath*:META-INF/applicationContext-jpa.xml" />
 
-    <bean class="no.dusken.common.spring.DatadirPropertyConfigurer">
+    <context:component-scan base-package="no.dusken.common.ldap"/>
+    <task:annotation-driven />
+
+    <bean class="no.dusken.common.spring.DatadirPropertyPlaceholderConfigurer">
         <property name="configurationFileName" value="marb.conf" />
         <property name="dataDirectoryLocator">
             <bean class="org.simplericity.datadirlocator.DefaultDataDirectoryLocator">
@@ -18,7 +23,18 @@
         </property>
     </bean>
 
-    <bean id="propertyReplacer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="file:/home/marv/marbstorage/marb.conf"/>
+    <bean class="no.dusken.common.logback.LogbackConfigBean">
+        <property name="loggingDirectory" value="${dataDir}/log"/>
+    </bean>
+
+    <bean class="org.springframework.ldap.core.LdapTemplate">
+        <property name="contextSource">
+            <bean class="org.springframework.ldap.core.support.LdapContextSource">
+        <property name="base" value="${ldap.base}" />
+        <property name="userDn" value="${ldap.userDn}" />
+        <property name="password" value="${ldap.password}" />
+        <property name="url" value="${ldap.urls}" />
+    </bean>
+        </property>
     </bean>
 </beans>

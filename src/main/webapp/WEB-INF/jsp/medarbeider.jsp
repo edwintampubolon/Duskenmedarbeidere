@@ -1,63 +1,60 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!doctype html>
-<html lang="no">
-<head>
-    <title>${medarbeider.name} | Medarbeidere i Under Dusken</title>
-    <link href="/resources/css/main.css" media="screen" rel="stylesheet" type="text/css"/>
-    <link rel="shortcut icon" href="/resources/images/udlogo.png" />
-</head>
-<body>
-<header>
-    <h1>${medarbeider.name}</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Oversikt</a></li>
-            <li><a title="Vis aktive" href="/aktive">Vis aktive</a></li>
-            <li><a title="Vis ikke-aktive" href="/ikkeaktive">Vis ikke-aktive</a></li>
-            <li><a title="Vis roller" href="/roller">Vis roller</a></li>
-            <li><a title="Ny medarbeider" href="/ny">Ny medarbeider</a></li>
-        </ul>
-    </nav>
-</header>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="include/header.jsp" />
 
 <div id="person">
-    <form:form commandName="person" >
+    <c:choose>
+        <c:when test="${not person.new}">
+            <c:set var="method" value="put"/>
+            <c:set var="target" value="/medarbeidere/${person.id}" />
+            <img src="/image/medarbeider_${person.username}.jpg" alt="${person.firstname}">
+        </c:when>
+        <c:otherwise>
+            <c:set var="method" value="post"/>
+            <c:set var="target" value="/medarbeidere/new" />
+        </c:otherwise>
+    </c:choose>
+    <form:form commandName="person" modelAttribute="person" method="${method}" action="${target}">
         <fieldset>
             <form:label path="firstname">Fornavn</form:label>
             <form:input path="firstname" />
             <form:label path="surname">Etternavn</form:label>
             <form:input path="surname" />
             <form:label path="username">Brukernavn</form:label>
-            <form:input path="username" readonly="${!person.isNew}" />
+            <form:input path="username" readonly="${!person.new}" />
+            <form:label path="emailAddress">Mailadresse (adressen duskenmail skal videresendes til)</form:label>
+            <input id="emailAddress" name="emailAddress" type="email" value=""/>
+
             <form:label path="birthdate">Fødselsdag</form:label>
-            <form:input path="birthdate" />
+            <input id="birthdate" name="birthdate" type="date" value=""/>
             <form:label path="active">Aktiv</form:label>
             <form:checkbox path="active" />
-            <form:label path="activePang">Aktiv pang</form:label>
-            <form:checkbox path="activePang" />
         </fieldset>
         <fieldset>
-            <form:label path="firstname">Telefon</form:label>
-            <form:input path="phoneNumber" />
+            <form:label path="phoneNumber">Telefon</form:label>
+            <input id="phoneNumber" name="phoneNumber" type="number" min="8" maxlength="8" value=""/>
             <form:label path="postalAddress">Postadresse</form:label>
             <form:input path="postalAddress" />
             <form:label path="postalCode">Postnummer</form:label>
-            <form:input path="postalCode" />
+            <input id="postalCode" name="postalCode" type="number" min="4" maxlength="4" value=""/>
         </fieldset>
         <fieldset>
-            <form:label path="homePhone">Hjemmetelefon</form:label>
-            <form:input path="homePhone" />
             <form:label path="homePostalAddress">Postadresse, hjemme</form:label>
             <form:input path="homePostalAddress" />
             <form:label path="homePostalCode">Postnummer, hjemme</form:label>
-            <form:input path="homePostalCode" />
+            <input id="homePostalCode" name="homePostalCode" type="number" min="4" maxlength="4" value=""/>
         </fieldset>
+        <fieldset>
+            <form:label path="department">Avdeling</form:label>
+            <form:select path="department" itemValue="id" itemLabel="name" items="${departments}" multiple="false" />
+            <form:label path="roles">Roller</form:label>
+            <form:select path="roles" itemValue="id" items="${roles}" multiple="true" />
+        </fieldset>
+
         <input type="submit" value="Lagre">
     </form:form>
 
 </div>
 
-<footer>Under Dusken</footer>
-</body>
-</html>
+<jsp:include page="include/footer.jsp" />

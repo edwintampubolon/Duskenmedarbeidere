@@ -28,7 +28,7 @@
     </beans:bean>
 
     <context:component-scan base-package="no.dusken.medarbeidere"/>
-    <resources location="classpath*:staticresources" mapping="resources/**"/>
+    <resources mapping="/resources/**" location="/resources/" />
     <annotation-driven />
     <view-controller path="/" view-name="index" />
 
