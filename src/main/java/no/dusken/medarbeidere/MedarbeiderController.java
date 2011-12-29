@@ -11,6 +11,7 @@ import no.dusken.common.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +55,14 @@ public class MedarbeiderController {
     @RequestMapping(value = "/{uid}", method = RequestMethod.GET)
     public String getMedarbeider(@PathVariable String uid, Model model){
         Person person = personService.getByUsername(uid);
+
+        model.addAttribute("person", person);
+        return "view";
+    }
+
+    @RequestMapping(value = "/rediger/{uid}", method = RequestMethod.GET)
+    public String getRedigerMedarbeider(@PathVariable String uid, Model model){
+        Person person = personService.getByUsername(uid);
         if(person == null){
             person = new Person();
         }
@@ -63,19 +72,22 @@ public class MedarbeiderController {
         return medarbeiderview;
     }
 
-    @RequestMapping(value = "/{uid}", method = RequestMethod.PUT)
-    public String updateMedarbeider(@ModelAttribute @Valid Person person){
-        return saveMedarbeider(person);
-    }
-
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String saveMedarbeider(@ModelAttribute @Valid Person person){
-        Person p = personService.save(person);
-        return "redirect:/medarbeidere/" + p.getId();
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveMedarbeider(@ModelAttribute @Valid Person person, BindingResult result, Model model){
+        if (result.hasErrors()) {
+            model.addAttribute("errors", result.getModel());
+            model.addAttribute("person", person);
+            model.addAttribute("roles", roleService.findAll());
+            model.addAttribute("departments", departmentService.findAll());
+            return medarbeiderview;
+        } else {
+            Person p = personService.save(person);
+            return "redirect:/medarbeidere/" + p.getUsername();
+        }
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search(@RequestParam String search, Model model){
+    public String search(@RequestParam String search, BindingResult result, Model model){
         model.addAttribute("medarbeidereheader", "Søk: " + search);
         model.addAttribute("people", null);
         return "index";

@@ -37,4 +37,6 @@
     </bean>
         </property>
     </bean>
+
+    <bean class="no.dusken.common.event.ContentEventNotifier" />
 </beans>
