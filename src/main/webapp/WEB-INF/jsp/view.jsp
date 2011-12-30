@@ -11,7 +11,7 @@
             <span id="username">${person.username}</span>
 
             <label for="emailAddress">Epost</label>
-            <span id="emailAddress">${person.emailAddress}</span>
+            <span id="emailAddress"><a href="mailto:${person.emailAddress}">${person.emailAddress}</a></span>
 
             <label for="birthdate">Fødselsdag</label>
             <span id="birthdate" ><fmt:formatDate value="${person.birthdate}" type="date" pattern="yyyy-MM-dd" /></span>
@@ -19,7 +19,7 @@
             <span id="active">${person.active}</span>
 
             <label for="phoneNumber">Telefon</label>
-            <span id="phoneNumber">${person.phoneNumber}</span>
+            <span id="phoneNumber"><a href="tel:${person.phoneNumber}">${person.phoneNumber}</a></span>
 
             <label for="postalAddress">Postadresse</label>
             <span id="postalAddress">${person.postalAddress}</span>
