@@ -28,14 +28,20 @@
     </bean>
 
     <bean class="org.springframework.ldap.core.LdapTemplate">
-        <property name="contextSource">
-            <bean class="org.springframework.ldap.core.support.LdapContextSource">
+        <constructor-arg ref="contextSource" />
+    </bean>
+
+    <bean id="contextSource" class="org.springframework.ldap.core.support.SingleContextSource">
+        <constructor-arg ref="context" />
+    </bean>
+
+    <bean id="context" factory-bean="contextSourceTarget" factory-method="getReadWriteContext" />
+
+    <bean id="contextSourceTarget" class="org.springframework.ldap.core.support.LdapContextSource">
         <property name="base" value="${ldap.base}" />
         <property name="userDn" value="${ldap.userDn}" />
         <property name="password" value="${ldap.password}" />
         <property name="url" value="${ldap.urls}" />
-    </bean>
-        </property>
     </bean>
 
     <bean class="no.dusken.common.event.ContentEventNotifier" />

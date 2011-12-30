@@ -3,6 +3,7 @@ package no.dusken.medarbeidere;
 import no.dusken.common.editor.BindByIdEditor;
 import no.dusken.common.editor.CollectionEditor;
 import no.dusken.common.editor.DateEditor;
+import no.dusken.common.ldap.SaveToLdap;
 import no.dusken.common.model.Department;
 import no.dusken.common.model.Person;
 import no.dusken.common.service.DepartmentService;
@@ -37,6 +38,9 @@ public class MedarbeiderController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private SaveToLdap saveToLdap;
 
     @RequestMapping("/aktive")
     public String getAktivePersons(Model model){
@@ -81,6 +85,9 @@ public class MedarbeiderController {
             model.addAttribute("departments", departmentService.findAll());
             return medarbeiderview;
         } else {
+            Long employeeNumber = saveToLdap.saveToLdap(person);
+            person.setExternalID(employeeNumber);
+            person.setExternalSource("Ldap");
             Person p = personService.save(person);
             return "redirect:/medarbeidere/" + p.getUsername();
         }
