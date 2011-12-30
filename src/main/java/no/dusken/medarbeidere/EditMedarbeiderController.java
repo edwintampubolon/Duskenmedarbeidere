@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +24,8 @@ import java.util.List;
  * @author Marvin B. Lillehaug <lillehau@underdusken.no>
  */
 @Controller
-@RequestMapping("/medarbeidere")
-public class MedarbeiderController {
+@RequestMapping("/medarbeidere/rediger")
+public class EditMedarbeiderController {
 
     private String listview = "medarbeidere";
     private String medarbeiderview = "medarbeider";
@@ -41,33 +42,38 @@ public class MedarbeiderController {
     @Autowired
     private SaveToLdap saveToLdap;
 
-    @RequestMapping("/aktive")
-    public String getAktivePersons(Model model){
-        model.addAttribute("medarbeidereheader", "Aktive personer");
-        model.addAttribute("people", personService.getByActive());
-        return listview;
-    }
+    @ModelAttribute
+    public Person redigerMedarbeider(@PathVariable String uid){
+        Person person = personService.getByUsername(uid);
+        if(person == null){
+            person = new Person();
+        }
 
-    @RequestMapping("/ikkeaktive")
-    public String getIkkeAktivePersons(Model model){
-        model.addAttribute("medarbeidereheader", "Ikke-aktive personer");
-        model.addAttribute("people", personService.getByNotActive());
-        return listview;
+        return person;
     }
 
     @RequestMapping(value = "/{uid}", method = RequestMethod.GET)
-    public String getMedarbeider(@PathVariable String uid, Model model){
-        Person person = personService.getByUsername(uid);
-
-        model.addAttribute("person", person);
-        return "view";
+    public String getRolesAndDepartmentsg(Model model){
+        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("departments", departmentService.findAll());
+        return medarbeiderview;
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search(@RequestParam String search, BindingResult result, Model model){
-        model.addAttribute("medarbeidereheader", "Søk: " + search);
-        model.addAttribute("people", null);
-        return "index";
+    @RequestMapping(value = "/{uid}", method = RequestMethod.POST)
+    public String lagreMedarbeider(@ModelAttribute @Valid Person person, BindingResult result, Model model){
+        if (result.hasErrors()) {
+            model.addAttribute("errors", result.getModel());
+            model.addAttribute("person", person);
+            model.addAttribute("roles", roleService.findAll());
+            model.addAttribute("departments", departmentService.findAll());
+            return medarbeiderview;
+        } else {
+            Long employeeNumber = saveToLdap.saveToLdap(person);
+            person.setExternalID(employeeNumber);
+            person.setExternalSource("Ldap");
+            Person p = personService.save(person);
+            return "redirect:/medarbeidere/" + p.getUsername();
+        }
     }
 
     @InitBinder

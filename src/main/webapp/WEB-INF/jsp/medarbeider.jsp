@@ -8,7 +8,7 @@
     <c:if test="${not person.new}">
         <img src="/image/medarbeider_${person.username}.jpg" alt="${person.firstname} ${person.surname}">
     </c:if>
-    <form:form commandName="person" modelAttribute="person" method="post" action="/medarbeidere/save">
+    <form:form commandName="person" modelAttribute="person" method="post" action="/medarbeidere/rediger/${person.username}">
         <fieldset>
             <form:label path="firstname">Fornavn</form:label>
             <form:errors path="firstname" />
