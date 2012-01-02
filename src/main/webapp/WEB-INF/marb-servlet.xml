@@ -30,6 +30,6 @@
     <context:component-scan base-package="no.dusken.medarbeidere"/>
     <resources mapping="/resources/**" location="/resources/" />
     <annotation-driven />
-    <view-controller path="/" view-name="index" />
+    <view-controller path="/medarbeidere" view-name="medarbeider/index" />
 
 </beans:beans>

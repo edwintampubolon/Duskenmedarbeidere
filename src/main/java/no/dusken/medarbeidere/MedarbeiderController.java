@@ -3,16 +3,15 @@ package no.dusken.medarbeidere;
 import no.dusken.common.editor.BindByIdEditor;
 import no.dusken.common.editor.CollectionEditor;
 import no.dusken.common.editor.DateEditor;
-import no.dusken.common.ldap.SaveToLdap;
 import no.dusken.common.model.Department;
 import no.dusken.common.model.Person;
 import no.dusken.common.service.DepartmentService;
 import no.dusken.common.service.PersonService;
 import no.dusken.common.service.RoleService;
+import no.dusken.medarbeidere.service.PersonSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +25,6 @@ import java.util.List;
 @RequestMapping("/medarbeidere")
 public class MedarbeiderController {
 
-    private String listview = "medarbeidere";
-    private String medarbeiderview = "medarbeider";
-
     @Autowired
     private PersonService personService;
 
@@ -39,20 +35,20 @@ public class MedarbeiderController {
     private DepartmentService departmentService;
 
     @Autowired
-    private SaveToLdap saveToLdap;
+    private PersonSearch personSearch;
 
     @RequestMapping("/aktive")
     public String getAktivePersons(Model model){
         model.addAttribute("medarbeidereheader", "Aktive personer");
         model.addAttribute("people", personService.getByActive());
-        return listview;
+        return "medarbeider/medarbeidere";
     }
 
     @RequestMapping("/ikkeaktive")
     public String getIkkeAktivePersons(Model model){
         model.addAttribute("medarbeidereheader", "Ikke-aktive personer");
         model.addAttribute("people", personService.getByNotActive());
-        return listview;
+        return "medarbeider/medarbeidere";
     }
 
     @RequestMapping(value = "/{uid}", method = RequestMethod.GET)
@@ -60,14 +56,20 @@ public class MedarbeiderController {
         Person person = personService.getByUsername(uid);
 
         model.addAttribute("person", person);
-        return "view";
+        return "medarbeider/view";
+    }
+
+    @RequestMapping
+    public String index(){
+        return "medarbeider/index";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search(@RequestParam String search, BindingResult result, Model model){
+    public String search(@RequestParam final String search, Model model){
         model.addAttribute("medarbeidereheader", "Søk: " + search);
-        model.addAttribute("people", null);
-        return "index";
+        model.addAttribute("people", personSearch.searchByFirstAndSurname(search));
+        model.addAttribute("search", search);
+        return "medarbeider/index";
     }
 
     @InitBinder

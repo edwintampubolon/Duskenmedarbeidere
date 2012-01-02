@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:include page="include/header.jsp" />
+<jsp:include page="../include/header.jsp" />
 
 <article id="person">
         <img src="/image/medarbeider_${person.username}.jpg" alt="${person.firstname} ${person.surname}">
@@ -46,4 +46,4 @@
             <a href="/medarbeidere/rediger/${person.username}">Redigér</a>
 </article>
 
-<jsp:include page="include/footer.jsp" />
+<jsp:include page="../include/footer.jsp" />

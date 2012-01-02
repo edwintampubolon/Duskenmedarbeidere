@@ -4,13 +4,15 @@ import no.dusken.common.model.DuskenObject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Kommentar extends DuskenObject{
     @Column(length = 10000)
     private String kommentar;
 
-    private DuskenObject kommentarTil;
+    @ManyToOne
+    private Galleri kommentarTil;
 
     public String getKommentar() {
         return kommentar;
@@ -24,7 +26,7 @@ public class Kommentar extends DuskenObject{
         return kommentarTil;
     }
 
-    public void setKommentarTil(DuskenObject kommentarTil) {
+    public void setKommentarTil(Galleri kommentarTil) {
         this.kommentarTil = kommentarTil;
     }
 }

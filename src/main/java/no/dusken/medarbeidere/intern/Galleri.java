@@ -2,6 +2,7 @@ package no.dusken.medarbeidere.intern;
 
 import no.dusken.common.model.DuskenObject;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Galleri extends DuskenObject {
 
     public String navn;
 
+    @ElementCollection
     public List<String> bilder;
 
     public String getNavn() {
