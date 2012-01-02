@@ -60,7 +60,8 @@ public class MedarbeiderController {
     }
 
     @RequestMapping
-    public String index(){
+    public String index(Model model){
+        model.addAttribute("roles", roleService.findAll());
         return "medarbeider/index";
     }
 

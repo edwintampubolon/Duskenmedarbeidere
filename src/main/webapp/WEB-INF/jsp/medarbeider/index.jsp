@@ -14,5 +14,15 @@
             <%@ include file="include/personElement.jsp" %>
         </c:forEach>
     </ul>
+    <ul id="personsByRoles">
+        <c:forEach items="${roles}" var="role">
+            <li class="role">
+                <h2>${role.name}</h2>
+                <c:forEach items="${role.persons}" var="person">
+                    <%@ include file="include/personElement.jsp" %>
+                </c:forEach>
+            </li>
+        </c:forEach>
+    </ul>
 </section>
 <jsp:include page="../include/footer.jsp" />
