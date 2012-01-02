@@ -14,7 +14,7 @@
             <li><a href="/medarbeidere">Søk</a></li>
             <li><a title="Vis aktive" href="/medarbeidere/aktive">Vis aktive</a></li>
             <li><a title="Vis ikke-aktive" href="/medarbeidere/ikkeaktive">Vis ikke-aktive</a></li>
-            <li><a title="Ny medarbeider" href="/medarbeidere/ny">Ny medarbeider</a></li>
+            <li><a title="Ny medarbeider" href="/medarbeidere/rediger/ny">Ny medarbeider</a></li>
         </ul>
     </nav>
 </header>

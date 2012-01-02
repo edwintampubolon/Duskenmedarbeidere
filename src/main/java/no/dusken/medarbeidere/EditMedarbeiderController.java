@@ -27,9 +27,6 @@ import java.util.List;
 @RequestMapping("/medarbeidere/rediger")
 public class EditMedarbeiderController {
 
-    private String listview = "medarbeidere";
-    private String medarbeiderview = "medarbeider";
-
     @Autowired
     private PersonService personService;
 
@@ -47,6 +44,7 @@ public class EditMedarbeiderController {
         Person person = personService.getByUsername(uid);
         if(person == null){
             person = new Person();
+            person.setUsername(uid);
         }
 
         return person;
@@ -56,7 +54,7 @@ public class EditMedarbeiderController {
     public String getRolesAndDepartmentsg(Model model){
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("departments", departmentService.findAll());
-        return medarbeiderview;
+        return "medarbeider/medarbeider";
     }
 
     @RequestMapping(value = "/{uid}", method = RequestMethod.POST)
@@ -66,7 +64,7 @@ public class EditMedarbeiderController {
             model.addAttribute("person", person);
             model.addAttribute("roles", roleService.findAll());
             model.addAttribute("departments", departmentService.findAll());
-            return medarbeiderview;
+            return "medarbeider/medarbeider";
         } else {
             Long employeeNumber = saveToLdap.saveToLdap(person);
             person.setExternalID(employeeNumber);
