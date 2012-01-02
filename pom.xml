@@ -4,7 +4,7 @@
     <parent>
         <groupId>no.dusken.common</groupId>
         <artifactId>parent</artifactId>
-        <version>1.2</version>
+        <version>1.3</version>
     </parent>
     <artifactId>Duskenmedarbeidere</artifactId>
     <packaging>war</packaging>
@@ -27,6 +27,33 @@
             <groupId>no.dusken.common</groupId>
             <artifactId>ldap</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>no.dusken.common</groupId>
+            <artifactId>plugin-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>no.dusken.common</groupId>
+            <artifactId>ldap-plugin</artifactId>
+            <version>1.8</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kantega.jexmec</groupId>
+            <artifactId>jexmec-api</artifactId>
+            <version>${jexmec.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kantega.jexmec</groupId>
+            <artifactId>jexmec-store</artifactId>
+            <version>1.26.1-DUSKEN</version>
             <scope>compile</scope>
         </dependency>
 
@@ -53,6 +80,37 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

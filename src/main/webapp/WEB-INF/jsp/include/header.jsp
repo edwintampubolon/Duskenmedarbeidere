@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang="no">
 <head>
@@ -14,7 +15,9 @@
             <li><a href="/medarbeidere">Søk</a></li>
             <li><a title="Vis aktive" href="/medarbeidere/aktive">Vis aktive</a></li>
             <li><a title="Vis ikke-aktive" href="/medarbeidere/ikkeaktive">Vis ikke-aktive</a></li>
+            <sec:authorize access="hasRole('supervisor')">
             <li><a title="Ny medarbeider" href="/medarbeidere/rediger/ny">Ny medarbeider</a></li>
+            </sec:authorize>
         </ul>
     </nav>
 </header>

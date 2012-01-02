@@ -45,4 +45,29 @@
     </bean>
 
     <bean class="no.dusken.common.event.ContentEventNotifier" />
+
+    <bean id="pluginManagerDuskenPlugin" class="no.dusken.common.plugin.spring.PluginManagerFactory">
+        <property name="servicesClass" value="no.dusken.medarbeidere.service.PluginServices"/>
+        <property name="pluginClass" value="no.dusken.common.plugin.DuskenPlugin"/>
+        <property name="postProcessors">
+            <list>
+                <bean class="no.dusken.common.plugin.spring.AdditionalBeansExposingPostProcessor">
+                    <property name="exposedBeanNames">
+                        <list>
+                            <value>transactionManager</value>
+                        </list>
+                    </property>
+                    <property name="placeholders">
+                        <props>
+                            <prop key="dataDir">${dataDir}</prop>
+                        </props>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="pluginStoreProvider" class="org.kantega.jexmec.store.xml.XmlPluginStoreProvider">
+        <constructor-arg value="${dataDir}/pluginstore.xml"/>
+    </bean>
 </beans>
