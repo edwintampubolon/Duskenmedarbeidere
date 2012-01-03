@@ -31,5 +31,5 @@
     <resources mapping="/resources/**" location="/resources/" />
     <annotation-driven />
     <view-controller path="/medarbeidere" view-name="medarbeider/index" />
-
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 </beans:beans>

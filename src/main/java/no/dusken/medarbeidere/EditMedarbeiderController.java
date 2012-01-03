@@ -9,14 +9,20 @@ import no.dusken.common.model.Person;
 import no.dusken.common.service.DepartmentService;
 import no.dusken.common.service.PersonService;
 import no.dusken.common.service.RoleService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Part;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +44,9 @@ public class EditMedarbeiderController {
 
     @Autowired
     private SaveToLdap saveToLdap;
+
+    @Value("#{ dataDir }/image/medarbeidere")
+    private File imagefolder;
 
     @ModelAttribute
     public Person redigerMedarbeider(@PathVariable String uid){
@@ -72,6 +81,13 @@ public class EditMedarbeiderController {
             Person p = personService.save(person);
             return "redirect:/medarbeidere/" + p.getUsername();
         }
+    }
+
+    @RequestMapping(value = "/{uid}/image", method = RequestMethod.POST)
+    public String uploadImage(@PathVariable String uid, @RequestParam Part file) throws IOException {
+        File medarbeiderBilde = new File(imagefolder, uid + ".jpg");
+        IOUtils.copy(file.getInputStream(), new FileOutputStream(medarbeiderBilde));
+        return "redirect:/medarbeidere/" + uid;
     }
 
     @InitBinder

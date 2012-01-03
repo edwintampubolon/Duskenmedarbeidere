@@ -44,7 +44,6 @@
         </property>
     </bean>
 
-    <!--  <bean class="no.dusken.common.plugin.security.PluginAuthenticationProviderManager" init-method="init" />   -->
     <security:authentication-manager alias="authenticationManager" >
         <security:authentication-provider ref="casAuthenticationProvider" />
     </security:authentication-manager>

@@ -58,6 +58,10 @@
         <input type="submit" value="Lagre">
     </form:form>
 
+    <form method="post" action="/medarbeidere/rediger/${person.username}/image" enctype="multipart/form-data">
+        <label for="file">Bilde:</label> <input id="file" type="file" name="file"/>
+        <input value="Last opp" type="submit"/>
+    </form>
 </div>
 
 <jsp:include page="../include/footer.jsp" />
