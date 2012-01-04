@@ -31,5 +31,11 @@
     <resources mapping="/resources/**" location="/resources/" />
     <annotation-driven />
     <view-controller path="/medarbeidere" view-name="medarbeider/index" />
-    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+
+    <!--<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>-->
+    <beans:bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="50000000"/>
+        <beans:property name="defaultEncoding" value="utf-8"/>
+    </beans:bean>
 </beans:beans>

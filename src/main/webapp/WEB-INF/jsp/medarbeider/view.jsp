@@ -4,7 +4,7 @@
 <jsp:include page="../include/header.jsp" />
 
 <article id="person">
-        <img src="/image/medarbeider_${person.username}.jpg" alt="${person.firstname} ${person.surname}">
+        <img src="/image?path=medarbeider/${person.username}.jpg" alt="${person.firstname} ${person.surname}">
         <h1>${person.firstname} ${person.surname}</h1>
 
             <label for="username">Brukernavn</label>

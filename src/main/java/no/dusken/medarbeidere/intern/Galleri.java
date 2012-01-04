@@ -4,6 +4,7 @@ import no.dusken.common.model.DuskenObject;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ public class Galleri extends DuskenObject {
     public String navn;
 
     @ElementCollection
-    public List<String> bilder;
+    public List<String> bilder = new LinkedList<String>();
 
     public String getNavn() {
         return navn;

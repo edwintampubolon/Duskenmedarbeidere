@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,9 +27,9 @@ public class ImageController {
 
     ImageReader imageReader = new ImageReaderImpl();
 
-    @RequestMapping("/image/{path}")
-    public void handleImage(@PathVariable String path, @RequestParam(required = false, defaultValue = "-1") Integer height, @RequestParam(required = false, defaultValue = "-1") Integer width, HttpServletResponse response) throws IOException {
-        File image = new File(imagefolder, path.replace("_", "/"));
+    @RequestMapping("/image")
+    public void handleImage(@RequestParam String path, @RequestParam(required = false, defaultValue = "0") Integer height, @RequestParam(required = false, defaultValue = "0") Integer width, HttpServletResponse response) throws IOException {
+        File image = new File(imagefolder, path);
         if (!image.exists() || !image.canRead()) {
             log.warn("Error reading: {}", image);
             try {
@@ -56,13 +55,13 @@ public class ImageController {
     }
 
     private File getOrCreateCachedFile(String path, Integer height, Integer width, File cache) throws IOException {
-        File image;
-        image = new File(cache, path);
-        if(!image.exists()){
+        File cachedimage = new File(cache, path);
+        if(!cachedimage.exists()){
+            File image = new File(imagefolder, path);
             BufferedImage bufferedImage = imageReader.readImage(image, height, width);
-            ImageIO.write(bufferedImage, "jpeg", image);
+            ImageIO.write(bufferedImage, "jpeg", cachedimage);
         }
-        return image;
+        return cachedimage;
     }
 
     private File getCacheFile(Integer height, Integer width) {
