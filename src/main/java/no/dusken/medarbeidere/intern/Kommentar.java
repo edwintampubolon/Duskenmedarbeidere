@@ -4,6 +4,7 @@ import no.dusken.common.model.DuskenObject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Kommentar extends DuskenObject{
@@ -13,6 +14,9 @@ public class Kommentar extends DuskenObject{
     private String tittel;
 
     private String kommentarTil;
+
+    @NotNull
+    private String forfatter;
 
     public String getKommentar() {
         return kommentar;
@@ -36,5 +40,13 @@ public class Kommentar extends DuskenObject{
 
     public void setKommentarTil(String kommentarTil) {
         this.kommentarTil = kommentarTil;
+    }
+
+    public String getForfatter() {
+        return forfatter;
+    }
+
+    public void setForfatter(String forfatter) {
+        this.forfatter = forfatter;
     }
 }
