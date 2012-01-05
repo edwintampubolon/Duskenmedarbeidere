@@ -4,6 +4,8 @@ import no.dusken.medarbeidere.service.GalleriService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +29,21 @@ public class GalleriController {
     @Autowired
     private GalleriService galleriService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("gallerier", galleriService.findAll());
-        return "index";
+        return "galleri/index";
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String contentList(@RequestParam(required = false, defaultValue = "0") Integer number, Model model){
+        if (number == 0) {
+            model.addAttribute("gallerier", galleriService.findAll());
+        } else {
+            Page<Galleri> gallerier = galleriService.findAll(new PageRequest(0, number));
+            model.addAttribute("gallerier", gallerier.getContent());
+        }
+        return "galleri/include/gallerier";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

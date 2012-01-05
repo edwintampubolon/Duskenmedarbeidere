@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="no">
 <head>
-    <title>Gallerier | Under Dusken Intern</title>
+    <title>Under Dusken Intern</title>
     <link href="/resources/css/main.css" media="screen" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="/resources/images/udlogo.png" />
     <script src="/resources/js/jquery.min.js"></script>
@@ -14,8 +14,8 @@
     <nav>
         <ul>
             <li><a href="/">UDIntern</a></li>
-            <li><a href="/galleri">Oversikt</a></li>
-            <li><a title="Nytt galleri" href="/galleri/nytt">Nytt galleri</a></li>
+            <li><a href="/galleri">Galleri</a></li>
+            <li><a title="Medarbeidere" href="/medarbeidere">Medarbeideroversikt</a></li>
         </ul>
     </nav>
 </header>

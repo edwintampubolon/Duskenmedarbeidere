@@ -4,7 +4,15 @@
 
 <article id="galleri">
     <h1>${galleri.navn}</h1>
-    <a href="/galleri/${galleri.id}?bilde=${(param.bilde + 1) % (fn:length(galleri.bilder) )}"><img src="/image?path=galleri/${galleri.navn}/${galleri.bilder[param.bilde]}&width=900"></a>
+    <c:choose>
+        <c:when test="${param.bilde eq null}">
+            <c:set var="currentBilde" value="0"/>
+        </c:when>
+        <c:otherwise>
+            <c:set var="currentBilde" value="${param.bilde}"/>
+        </c:otherwise>
+    </c:choose>
+    <a href="/galleri/${galleri.id}?bilde=${(currentBilde + 1) % (fn:length(galleri.bilder) )}"><img src="/image?path=galleri/${galleri.navn}/${galleri.bilder[currentBilde]}&width=900"></a>
 
     <ul id="thumbs">
         <c:forEach items="${galleri.bilder}" var="bilde" varStatus="status">
