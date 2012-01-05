@@ -17,14 +17,14 @@ public class KommentarController {
     @Autowired
     private KommentarService kommentarService;
 
-    @RequestMapping(value = "/${objekt}", method = RequestMethod.GET)
-    public String getForObjekt(@PathVariable String object, Model model){
-        model.addAttribute("kommentarer", kommentarService.findByKommentarTil(object));
-        model.addAttribute("objectId", object);
+    @RequestMapping(value = "/{objekt}", method = RequestMethod.GET)
+    public String getForObjekt(@PathVariable String objekt, Model model){
+        model.addAttribute("kommentarer", kommentarService.findByKommentarTil(objekt));
+        model.addAttribute("objectId", objekt);
         return "kommentar/view";
     }
 
-    @RequestMapping(value = "/ny", method = RequestMethod.GET)
+    @RequestMapping(value = "/ny", method = RequestMethod.POST)
     public ResponseEntity ny(@ModelAttribute Kommentar kommentar){
         kommentarService.save(kommentar);
         return new ResponseEntity(HttpStatus.OK);
