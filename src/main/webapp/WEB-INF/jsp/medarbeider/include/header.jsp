@@ -12,10 +12,11 @@
     <h1>Medarbeidere i Under Dusken</h1>
     <nav>
         <ul>
+            <li><a href="/">UDIntern</a></li>
             <li><a href="/medarbeidere">Søk</a></li>
             <li><a title="Vis aktive" href="/medarbeidere/aktive">Vis aktive</a></li>
             <li><a title="Vis ikke-aktive" href="/medarbeidere/ikkeaktive">Vis ikke-aktive</a></li>
-            <sec:authorize access="hasRole('supervisor')">
+            <sec:authorize access="hasRole('ROLE_MASKINIST')">
             <li><a title="Ny medarbeider" href="/medarbeidere/rediger/ny">Ny medarbeider</a></li>
             </sec:authorize>
         </ul>

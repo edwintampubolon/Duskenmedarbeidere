@@ -1,4 +1,4 @@
-<jsp:include page="../include/header.jsp" />
+<jsp:include page="include/header.jsp" />
 <form method="post" action="<%=request.getContextPath() %>/galleri/nytt" enctype="multipart/form-data">
     <label for="name">Navn</label>
     <input id="name" name="navn" type="text">

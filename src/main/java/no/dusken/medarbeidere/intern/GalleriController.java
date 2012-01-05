@@ -27,6 +27,12 @@ public class GalleriController {
     @Autowired
     private GalleriService galleriService;
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(Model model){
+        model.addAttribute("gallerier", galleriService.findAll());
+        return "index";
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String visGalleri(@PathVariable Long id, Model model){
         model.addAttribute("galleri", galleriService.findOne(id));

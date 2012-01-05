@@ -14,8 +14,5 @@
         </c:forEach>
     </ul>
 </article>
-<div id="ajaxkommentar"></div>
-<script>
-    $('#ajaxkommentar').load('/kommentar/${galleri.navn}${param.bilde}');
-</script>
+
 <jsp:include page="../include/footer.jsp" />

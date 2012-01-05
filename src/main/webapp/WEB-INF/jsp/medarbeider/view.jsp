@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:include page="../include/header.jsp" />
+<jsp:include page="include/header.jsp" />
 
 <article id="person">
-        <img src="/image?path=medarbeider/${person.username}.jpg" alt="${person.firstname} ${person.surname}">
+        <img src="/image?path=medarbeidere/${person.username}.jpg" alt="${person.firstname} ${person.surname}">
         <h1>${person.firstname} ${person.surname}</h1>
 
             <label for="username">Brukernavn</label>
