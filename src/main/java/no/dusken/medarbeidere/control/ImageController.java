@@ -59,6 +59,7 @@ public class ImageController {
         if(!cachedimage.exists()){
             File image = new File(imagefolder, path);
             BufferedImage bufferedImage = imageReader.readImage(image, height, width);
+            cachedimage.mkdirs();
             ImageIO.write(bufferedImage, "jpeg", cachedimage);
         }
         return cachedimage;
