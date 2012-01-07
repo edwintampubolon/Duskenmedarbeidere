@@ -10,12 +10,17 @@
 </head>
 <body>
 <header>
-    <h1>Gallerier</h1>
+    <h1>Under Duskens Interne sider</h1>
     <nav>
         <ul>
             <li><a href="/">UDIntern</a></li>
-            <li><a href="/galleri">Galleri</a></li>
+            <li><a href="https://underdusken.no/intern/guru">Guru</a></li>
+            <li><a href="https://underdusken.no/intern/annonse/">Annonsesystem</a></li>
             <li><a title="Medarbeidere" href="/medarbeidere">Medarbeideroversikt</a></li>
+            <li><a title="Mailinglister" href="https://underdusken.no/mailman/listinfo">Mailinglister</a></li>
+            <li><a href="/galleri">Galleri</a></li>
+            <li><a href="https://underdusken.no/barweb/">Barweb</a></li>
+            <li><a href="http://underdusken.no:8080/pegadi-webapp/webstart/pegadi.jnlp">Pegadi</a></li>
         </ul>
     </nav>
 </header>

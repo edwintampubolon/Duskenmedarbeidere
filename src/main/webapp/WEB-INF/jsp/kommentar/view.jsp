@@ -3,6 +3,7 @@
     <h2>Kommentarer</h2>
     <form action="/kommentar/ny" method="post" id="kommentarform">
         <input type="hidden" value="${objectId}" name="kommentarTil">
+        <input type="hidden" value="Derpderpderp" name="forfatter">
         <label for="kommentar">Komment&eacute;r</label>
         <textarea id="kommentar" name="kommentar"></textarea>
         <input type="submit" value="Oki" />
