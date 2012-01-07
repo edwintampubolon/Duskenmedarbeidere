@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface KommentarService extends GenericService<Kommentar> {
     List<Kommentar> findByKommentarTil(String galleri);
+
+    Long findCountByKommentarTil(String objekt);
 }

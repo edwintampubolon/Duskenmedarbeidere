@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div id="kommentarer">
     <h2>Kommentarer</h2>
     <form action="/kommentar/ny" method="post" id="kommentarform">
@@ -8,7 +9,15 @@
         <textarea id="kommentar" name="kommentar"></textarea>
         <input type="submit" value="Oki" />
     </form>
-
+    <c:if test="${count > fn:length(kommentarer)}">
+        <a id="lastkommentarer" href="">Last alle kommentarene</a>
+        <script>
+            $('#lastkommentarer').click(function(event){
+                $('#ajaxkommentar').load('/kommentar/UDIntern');
+                return false;
+            });
+        </script>
+    </c:if>
     <script>
         $('#kommentarform').submit(function(event){
             event.preventDefault();

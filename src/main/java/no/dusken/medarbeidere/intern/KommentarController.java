@@ -2,14 +2,13 @@ package no.dusken.medarbeidere.intern;
 
 import no.dusken.medarbeidere.service.KommentarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/kommentar")
@@ -18,9 +17,16 @@ public class KommentarController {
     private KommentarService kommentarService;
 
     @RequestMapping(value = "/{objekt}", method = RequestMethod.GET)
-    public String getForObjekt(@PathVariable String objekt, Model model){
-        model.addAttribute("kommentarer", kommentarService.findByKommentarTil(objekt));
+    public String getForObjekt(@PathVariable String objekt, @RequestParam(required = false, defaultValue = "0") Integer number, Model model){
+        if (number == 0) {
+            model.addAttribute("kommentarer", kommentarService.findByKommentarTil(objekt));
+        }else {
+            Page<Kommentar> all = kommentarService.findAll(new PageRequest(0, number));
+            model.addAttribute("kommentarer", all.getContent());
+        }
+        model.addAttribute("count", kommentarService.findCountByKommentarTil(objekt));
         model.addAttribute("objectId", objekt);
+
         return "kommentar/view";
     }
 

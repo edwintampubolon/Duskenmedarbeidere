@@ -1,3 +1,3 @@
-<footer>Under Dusken</footer>
+<footer>Under Dusken – Studentersamfundet i Trondhjem</footer>
 </body>
 </html>
