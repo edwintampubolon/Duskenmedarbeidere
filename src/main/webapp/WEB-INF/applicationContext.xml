@@ -47,7 +47,7 @@
     <bean class="no.dusken.common.event.ContentEventNotifier" />
 
     <bean id="pluginManagerDuskenPlugin" class="no.dusken.common.plugin.spring.PluginManagerFactory">
-        <property name="servicesClass" value="no.dusken.medarbeidere.service.PluginServices"/>
+        <property name="servicesClass" value="no.dusken.intern.service.PluginServices"/>
         <property name="pluginClass" value="no.dusken.common.plugin.DuskenPlugin"/>
         <property name="postProcessors">
             <list>

@@ -1,6 +1,6 @@
-package no.dusken.medarbeidere.intern;
+package no.dusken.intern.intern;
 
-import no.dusken.medarbeidere.service.GalleriService;
+import no.dusken.intern.service.GalleriService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

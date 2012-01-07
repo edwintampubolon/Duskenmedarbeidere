@@ -1,4 +1,4 @@
-package no.dusken.medarbeidere.service;
+package no.dusken.intern.service;
 
 import no.dusken.common.model.Person;
 import no.dusken.common.model.Person_;

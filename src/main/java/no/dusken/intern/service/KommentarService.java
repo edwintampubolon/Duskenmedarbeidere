@@ -1,7 +1,7 @@
-package no.dusken.medarbeidere.service;
+package no.dusken.intern.service;
 
 import no.dusken.common.service.GenericService;
-import no.dusken.medarbeidere.intern.Kommentar;
+import no.dusken.intern.intern.Kommentar;
 
 import java.util.List;
 

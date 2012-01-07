@@ -1,4 +1,4 @@
-package no.dusken.medarbeidere.intern;
+package no.dusken.intern.intern;
 
 public class RSSItem {
     private String title;

@@ -1,4 +1,4 @@
-package no.dusken.medarbeidere;
+package no.dusken.intern;
 
 import no.dusken.common.editor.BindByIdEditor;
 import no.dusken.common.editor.CollectionEditor;
@@ -8,7 +8,7 @@ import no.dusken.common.model.Person;
 import no.dusken.common.service.DepartmentService;
 import no.dusken.common.service.PersonService;
 import no.dusken.common.service.RoleService;
-import no.dusken.medarbeidere.service.PersonSearch;
+import no.dusken.intern.service.PersonSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

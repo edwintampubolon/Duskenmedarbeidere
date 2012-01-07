@@ -1,4 +1,4 @@
-package no.dusken.medarbeidere;
+package no.dusken.intern;
 
 import no.dusken.common.editor.BindByIdEditor;
 import no.dusken.common.editor.CollectionEditor;

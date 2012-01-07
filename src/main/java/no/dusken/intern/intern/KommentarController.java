@@ -1,6 +1,6 @@
-package no.dusken.medarbeidere.intern;
+package no.dusken.intern.intern;
 
-import no.dusken.medarbeidere.service.KommentarService;
+import no.dusken.intern.service.KommentarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

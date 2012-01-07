@@ -1,4 +1,4 @@
-package no.dusken.medarbeidere.control;
+package no.dusken.intern.control;
 
 import no.dusken.common.util.ImageReader;
 import no.dusken.common.util.impl.ImageReaderImpl;

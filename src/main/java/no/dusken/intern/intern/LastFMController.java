@@ -1,4 +1,4 @@
-package no.dusken.medarbeidere.intern;
+package no.dusken.intern.intern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +33,9 @@ public class LastFMController {
         return "lastfm";
     }
 
-    private List<no.dusken.medarbeidere.intern.RSSItem> writeNews() {
+    private List<RSSItem> writeNews() {
 
-        List<no.dusken.medarbeidere.intern.RSSItem> items = new LinkedList<no.dusken.medarbeidere.intern.RSSItem>();
+        List<RSSItem> items = new LinkedList<RSSItem>();
         try {
 
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();

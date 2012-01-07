@@ -1,4 +1,4 @@
-package no.dusken.medarbeidere.service;
+package no.dusken.intern.service;
 
 import org.kantega.jexmec.Services;
 import org.kantega.jexmec.store.PluginStoreProvider;
