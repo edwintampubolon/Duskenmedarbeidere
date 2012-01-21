@@ -27,7 +27,7 @@
         <beans:property name="suffix" value=".jsp" />
     </beans:bean>
 
-    <context:component-scan base-package="no.dusken.medarbeidere"/>
+    <context:component-scan base-package="no.dusken.intern"/>
     <resources mapping="/resources/**" location="/resources/" />
     <annotation-driven />
     <view-controller path="/medarbeidere" view-name="medarbeider/index" />

@@ -1,4 +1,4 @@
-package no.dusken.intern.intern;
+package no.dusken.intern.intern.model;
 
 import no.dusken.common.model.DuskenObject;
 

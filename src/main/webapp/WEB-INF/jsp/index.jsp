@@ -7,7 +7,7 @@
         <h2>Interne nyheter</h2>
         <div id="ajaxkommentar"></div>
         <script>
-            $('#ajaxkommentar').load('/kommentar/UDIntern?number=5');
+            $('#ajaxkommentar').load('/kommentar/UDIntern?number=5&useTitle=true');
         </script>
     </section>
     <section>

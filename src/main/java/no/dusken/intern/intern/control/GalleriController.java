@@ -1,5 +1,6 @@
-package no.dusken.intern.intern;
+package no.dusken.intern.intern.control;
 
+import no.dusken.intern.intern.Galleri;
 import no.dusken.intern.service.GalleriService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;

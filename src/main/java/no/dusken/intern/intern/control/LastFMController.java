@@ -1,5 +1,6 @@
-package no.dusken.intern.intern;
+package no.dusken.intern.intern.control;
 
+import no.dusken.intern.intern.RSSItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
