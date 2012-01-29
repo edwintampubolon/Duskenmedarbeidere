@@ -20,9 +20,9 @@ public class KommentarController {
     @RequestMapping(value = "/{objekt}", method = RequestMethod.GET)
     public String getForObjekt(@PathVariable String objekt, @RequestParam(required = false, defaultValue = "0") Integer number, @RequestParam(defaultValue = "false", required = false) Boolean useTitle, Model model){
         if (number == 0) {
-            model.addAttribute("kommentarer", kommentarService.findByKommentarTil(objekt));
+            model.addAttribute("kommentarer", kommentarService.findByKommentarTilOrderByTimeCreatedDesc(objekt));
         }else {
-            Page<Kommentar> all = kommentarService.findAll(new PageRequest(0, number));
+            Page<Kommentar> all = kommentarService.findByKommentarTilOrderByTimeCreatedDesc(objekt, new PageRequest(0, number));
             model.addAttribute("kommentarer", all.getContent());
         }
         model.addAttribute("count", kommentarService.findCountByKommentarTil(objekt));

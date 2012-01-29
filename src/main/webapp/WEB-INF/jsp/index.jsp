@@ -23,8 +23,10 @@
         <div id="vakter"></div>
         <script type="text/javascript"> $("#vakter").load('https://underdusken.no/barweb/plugins/blank/vakt/next.do')  </script>
     </section>
-    <div id="bilder"></div>
+    <section id="fodselsdager"></section>
+    <section id="bilder"></section>
     <script>
+        $('#fodselsdager').load('/medarbeidere/fodselsdager');
         $('#bilder').load('/galleri/list?number=5');
     </script>
 </div>
