@@ -106,7 +106,20 @@ public class ImportController {
                 String filename = i + name.substring(endIndex);
                 saveKommentar(bildeDir, name, filename, galleriName);
                 galleribilder.add(filename);
-                IOUtils.copy(new FileInputStream(f), new FileOutputStream(new File(gallerimappe, filename)));
+
+                if(i == 0){
+                    GregorianCalendar timeCreated = new GregorianCalendar();
+                    timeCreated.setTime(new java.util.Date(f.lastModified()));
+                    galleri.setTimeCreated(timeCreated);
+                }
+
+                FileInputStream input = new FileInputStream(f);
+                FileOutputStream output = new FileOutputStream(new File(gallerimappe, filename));
+
+                IOUtils.copy(input, output);
+
+                IOUtils.closeQuietly(input);
+                IOUtils.closeQuietly(output);
             }
             galleriService.save(galleri);
         }
@@ -116,16 +129,19 @@ public class ImportController {
     private void saveKommentar(File dir, String derpname, String herpName, String galleriName) throws IOException, ParseException {
         String kommentarFileName = "comment_" + derpname + ".txt";
         File kommentarer = new File(dir, kommentarFileName);
-        BufferedReader in  = new BufferedReader(new FileReader(kommentarer));
-        StringBuilder stringBuilder = new StringBuilder();
-        String fileline;
-        while ((fileline = in.readLine()) != null){
-            stringBuilder.append(fileline.trim());
-        }
-        for(String line : stringBuilder.toString().split("<p>")){
-            if (line.length() > 0) {
-                derp(line, galleriName, herpName);
+        if (kommentarer.exists()) {
+            BufferedReader in  = new BufferedReader(new FileReader(kommentarer));
+            StringBuilder stringBuilder = new StringBuilder();
+            String fileline;
+            while ((fileline = in.readLine()) != null){
+                stringBuilder.append(fileline.trim());
             }
+            for(String line : stringBuilder.toString().split("<p>")){
+                if (line.length() > 0) {
+                    derp(line, galleriName, herpName);
+                }
+            }
+            in.close();
         }
     }
 
