@@ -26,7 +26,7 @@ public class LastFMController {
     private String rssUrl = "http://ws.audioscrobbler.com/1.0/user/duskenbaren/recenttracks.rss";
     //Tue, 15 Nov 2011 03:51:02 +0000
     private SimpleDateFormat inputDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
-    private SimpleDateFormat outDateFormat = new SimpleDateFormat("EEE HH:mm:ss dd MMM yyyy", Locale.forLanguageTag("no"));
+    private SimpleDateFormat outDateFormat = new SimpleDateFormat("EEE HH:mm:ss dd MMM yyyy", new Locale("no"));
 
     @RequestMapping
     public String getLastFM(Model model){
